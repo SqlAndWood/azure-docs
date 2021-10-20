@@ -452,6 +452,13 @@ async def main(req: func.HttpRequest, starter: str) -> func.HttpResponse:
     )
 
     for instance in instances:
+        # return a dict
+        
+        inst_dict = instance.to_json()
+        
+        for key, value in orchestrator_attributes.items():
+            logging.log(f'{key}: {value}')
+            
         logging.log(json.dumps(instance))
 ```
 
