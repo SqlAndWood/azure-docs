@@ -339,6 +339,12 @@ async def main(req: func.HttpRequest, starter: str) -> func.HttpResponse:
     instances = await client.get_status_all()
 
     for instance in instances:
+        # options to convert the instance into a dict
+        attributes = instance.to_json()
+       
+        for key, value in attributes.items():
+           warning(f'{key}: {value}')
+    
         logging.log(json.dumps(instance))
 ```
 
@@ -452,6 +458,13 @@ async def main(req: func.HttpRequest, starter: str) -> func.HttpResponse:
     )
 
     for instance in instances:
+        # return a dict
+        
+        inst_dict = instance.to_json()
+        
+        for key, value in orchestrator_attributes.items():
+            logging.log(f'{key}: {value}')
+            
         logging.log(json.dumps(instance))
 ```
 
